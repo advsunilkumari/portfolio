@@ -2697,6 +2697,30 @@ button {
   font-size: 0.8rem;
 }
 
+.footer-copy-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.footer-creator {
+  font-size: 0.8rem;
+  color: var(--text-light-muted);
+}
+
+.creator-link {
+  color: var(--gold-400);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: var(--transition);
+}
+
+.creator-link:hover {
+  color: var(--white);
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+}
+
 .bottom-links {
   display: flex;
   align-items: center;
