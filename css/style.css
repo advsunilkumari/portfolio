@@ -74,6 +74,8 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 body {
@@ -82,7 +84,10 @@ body {
   color: var(--text-main);
   line-height: 1.65;
   overflow-x: hidden;
+  max-width: 100vw;
+  min-width: 320px;
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
 }
 
 img {
@@ -2779,12 +2784,118 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   19. Responsive Media Queries
+   19. Responsive Media Queries & Mobile Enhancements
    -------------------------------------------------------------------------- */
+
+/* Mobile Floating Quick-Action Bar */
+.mobile-bottom-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 998;
+  background: rgba(10, 25, 47, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(212, 175, 55, 0.3);
+  padding: 0.6rem 1rem;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.45);
+}
+
+.mobile-bottom-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.mob-action-info {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--text-light);
+  min-width: 0;
+}
+
+.mob-action-info .pulse-dot {
+  flex-shrink: 0;
+}
+
+.mob-action-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  min-width: 0;
+}
+
+.mob-action-label {
+  color: var(--gold-400);
+  font-weight: 700;
+  font-size: 0.74rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.mob-action-sub {
+  color: var(--text-light-muted);
+  font-size: 0.66rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mob-action-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.mob-action-btn {
+  padding: 0.55rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+  touch-action: manipulation;
+}
+
+.mob-action-btn-email {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-light);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.mob-action-btn-email:hover,
+.mob-action-btn-email:active {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: var(--gold-500);
+  color: var(--gold-400);
+}
+
+.mob-action-btn-book {
+  background: var(--gold-gradient);
+  color: var(--navy-950);
+  box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+}
+
+.mob-action-btn-book:hover,
+.mob-action-btn-book:active {
+  filter: brightness(1.05);
+}
+
+/* Tablet & Smaller Screens Breakpoint (<= 1024px) */
 @media (max-width: 1024px) {
   .hero-container {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2.75rem;
     text-align: center;
   }
   
@@ -2802,6 +2913,7 @@ button {
   
   .trust-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
   
   .about-grid {
@@ -2812,6 +2924,18 @@ button {
   .chamber-card-wrapper {
     max-width: 440px;
     margin: 0 auto;
+    position: relative;
+  }
+
+  /* Prevent quote box from hanging off the right edge */
+  .chamber-quote-box {
+    position: static;
+    margin-top: 1.25rem;
+    right: auto;
+    bottom: auto;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   .criminal-pillars-grid {
@@ -2820,6 +2944,7 @@ button {
   
   .roadmap-steps {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
   
   .roadmap-steps::before {
@@ -2832,24 +2957,109 @@ button {
   
   .booking-wrapper {
     grid-template-columns: 1fr;
+    gap: 2.5rem;
   }
   
   .contact-grid {
     grid-template-columns: 1fr;
+    gap: 2.5rem;
   }
   
   .footer-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
   }
 }
 
+/* Smartphone & Portrait Tablet Breakpoint (<= 768px) */
 @media (max-width: 768px) {
+  /* Prevent horizontal scrollbar on small viewports */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  body {
+    padding-bottom: 64px; /* Room for floating quick bar */
+  }
+
+  .mobile-bottom-bar {
+    display: block;
+  }
+
+  /* Container & Spacing Optimization */
+  .container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .section {
+    padding: 3.5rem 0;
+  }
+
+  .section-header {
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.5rem, 5.5vw, 1.95rem);
+    line-height: 1.3;
+  }
+
+  .section-lead {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* Buttons & Touch Accessibility */
+  .btn {
+    white-space: normal;
+    text-align: center;
+    max-width: 100%;
+    line-height: 1.35;
+    touch-action: manipulation;
+  }
+
+  .btn-lg {
+    padding: 0.85rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  /* Top Ethics Notice Strip */
+  .ethics-ticker-strip {
+    padding: 0.65rem 0;
+  }
+
+  .ticker-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .ticker-left {
+    justify-content: center;
+    flex-wrap: wrap;
+    font-size: 0.78rem;
+  }
+
+  .ticker-right {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    font-size: 0.76rem;
+  }
+
+  /* Header & Navigation */
   .desktop-nav {
     display: none;
   }
   
   .mobile-toggle {
     display: flex;
+    min-width: 44px;
+    min-height: 44px;
+    touch-action: manipulation;
   }
   
   .nav-cta {
@@ -2857,80 +3067,552 @@ button {
   }
   
   .header-container {
-    min-height: 80px;
-    padding-top: 0.65rem;
-    padding-bottom: 0.65rem;
+    min-height: 68px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
   }
   
+  .brand-link {
+    gap: 0.65rem;
+    min-width: 0;
+  }
+
+  .brand-seal {
+    width: 42px;
+    height: 42px;
+  }
+
+  .seal-initials {
+    font-size: 1.05rem;
+  }
+
+  .brand-info {
+    min-width: 0;
+  }
+
   .adv-title {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   .adv-sub {
-    font-size: 0.68rem;
+    font-size: 0.66rem;
+    max-width: 215px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Mobile Drawer Menu */
+  .mobile-drawer {
+    width: min(320px, 86vw);
+    max-width: 100vw;
+    padding: 1.5rem 1.25rem;
+    overflow-y: auto;
+  }
+
+  .drawer-close {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    padding: 3rem 0 3.5rem;
   }
 
   .hero-adv-name {
-    font-size: 2.25rem;
-    white-space: nowrap;
+    font-size: clamp(1.85rem, 6.5vw, 2.35rem);
+    white-space: normal;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    line-height: 1.2;
   }
   
   .hero-title-sub {
-    font-size: 1.35rem;
+    font-size: clamp(1.15rem, 4.2vw, 1.35rem);
+    line-height: 1.35;
+    margin-top: 0.45rem;
   }
-  
+
+  .hero-subtitle {
+    font-size: 0.94rem;
+    line-height: 1.65;
+    margin-bottom: 1.75rem;
+  }
+
   .academic-strip {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
   }
-  
-  .floating-badge {
-    position: static;
-    margin-top: 0.75rem;
+
+  .academic-chip {
+    padding: 0.85rem 1rem;
+    text-align: left;
   }
-  
+
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-trust-note {
+    font-size: 0.78rem;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.35rem;
+    line-height: 1.45;
+  }
+
+  /* Portrait Visual & Floating Badges */
   .portrait-card-wrapper {
-    max-width: 320px;
+    max-width: 290px;
+    margin: 0 auto;
   }
   
   .portrait-img {
-    height: 420px;
+    height: 380px;
   }
-  
-  .criminal-pillars-grid {
-    grid-template-columns: 1fr;
+
+  .floating-badge {
+    position: static;
+    margin-top: 0.65rem;
+    width: 100%;
+    justify-content: flex-start;
+    animation: none;
+    box-sizing: border-box;
   }
-  
-  .practice-cards-grid {
-    grid-template-columns: 1fr;
+
+  /* Trust & Credentials Bar */
+  .trust-bar-section {
+    padding: 1.75rem 0;
   }
-  
-  .date-slot-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .contact-inputs-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .mode-selector-group {
-    grid-template-columns: 1fr;
-  }
-  
+
   .trust-grid {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
-  
-  .footer-grid {
-    grid-template-columns: 1fr;
+
+  .trust-item {
+    gap: 0.85rem;
   }
-  
-  .ticker-container {
+
+  /* About Section */
+  .about-heading {
+    font-size: clamp(1.35rem, 5vw, 1.65rem);
+    line-height: 1.35;
+  }
+
+  .about-p {
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+
+  .triad-card {
+    padding: 0.85rem 1rem;
+  }
+
+  .about-bottom-cta {
     flex-direction: column;
+    align-items: stretch;
+    gap: 0.85rem;
     text-align: center;
   }
-  
+
+  .about-bottom-cta .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Criminal Law Pillars */
+  .criminal-pillars-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .pillar-card {
+    padding: 1.5rem 1.15rem;
+  }
+
+  .criminal-roadmap-box {
+    padding: 1.5rem 1rem;
+    margin-top: 2.5rem;
+  }
+
+  .roadmap-header h4 {
+    font-size: 1.25rem;
+    line-height: 1.35;
+  }
+
+  .roadmap-header p {
+    font-size: 0.88rem;
+  }
+
+  .step-card {
+    padding: 1.25rem 0.85rem;
+  }
+
+  .roadmap-cta {
+    margin-top: 1.75rem;
+  }
+
+  .roadmap-cta .btn {
+    width: 100%;
+    justify-content: center;
+    white-space: normal;
+  }
+
+  /* Practice Areas Grid */
+  .practice-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .practice-card {
+    padding: 1.5rem 1.15rem;
+  }
+
+  .practice-title {
+    font-size: 1.15rem;
+  }
+
+  /* Media Hub (Unboxing Law) */
+  .media-card {
+    padding: 1.35rem 1rem;
+  }
+
+  .video-info .video-title {
+    font-size: 1.18rem;
+  }
+
+  .video-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .video-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .insta-profile-preview {
+    gap: 0.85rem;
+  }
+
+  /* Chamber Appointment Booking (5 PM - 9 PM) */
+  .sidebar-box {
+    padding: 1.35rem 1rem;
+  }
+
   .booking-main-card {
-    padding: 1.75rem;
+    padding: 1.5rem 1.15rem;
+  }
+
+  .form-step-header h4 {
+    font-size: 1.12rem;
+  }
+
+  .mode-selector-group {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .mode-card {
+    padding: 1rem 0.85rem;
+  }
+
+  .date-slot-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .slots-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .time-slot-btn {
+    min-height: 44px;
+    padding: 0.65rem 0.35rem;
+    font-size: 0.84rem;
+    touch-action: manipulation;
+  }
+
+  .contact-inputs-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  /* iOS Safari Auto-Zoom Fix: Ensure form controls are 16px */
+  .form-control {
+    font-size: 16px !important;
+    padding: 0.75rem 0.85rem;
+  }
+
+  .form-submit-row .btn {
+    width: 100%;
+    white-space: normal;
+    padding: 0.95rem 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  /* Modals (BCI & Booking Receipt) */
+  .bci-modal-overlay,
+  .modal-overlay {
+    padding: 0.75rem;
+  }
+
+  .bci-modal-card {
+    max-height: 86vh;
+    border-radius: var(--radius-md);
+  }
+
+  .bci-card-header {
+    padding: 1.25rem 1rem;
+    gap: 0.75rem;
+  }
+
+  .crest-emblem {
+    width: 42px;
+    height: 42px;
+  }
+
+  .bci-card-header h2 {
+    font-size: 1.15rem;
+    line-height: 1.3;
+  }
+
+  .bci-card-body {
+    padding: 1.15rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .bci-checklist li {
+    padding: 0.75rem 0.85rem;
+    font-size: 0.82rem;
+  }
+
+  .bci-card-footer {
+    padding: 1rem;
+  }
+
+  .bci-card-footer .btn {
+    white-space: normal;
+    font-size: 0.92rem;
+    padding: 0.85rem 1rem;
+  }
+
+  .booking-success-card {
+    padding: 1.5rem 1rem;
+    border-radius: var(--radius-md);
+  }
+
+  .success-header h3 {
+    font-size: 1.2rem;
+  }
+
+  .appointment-receipt {
+    padding: 1rem;
+  }
+
+  .modal-actions-row {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  .modal-actions-row .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* FAQ Accordion */
+  .faq-question {
+    padding: 1rem 1.15rem;
+    font-size: 0.95rem;
+    gap: 0.75rem;
+  }
+
+  .faq-answer {
+    padding: 0 1.15rem;
+  }
+
+  .faq-answer p {
+    font-size: 0.88rem;
+  }
+
+  /* Contact & Map */
+  .contact-detail-card {
+    padding: 1.5rem 1.15rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .inquiry-card {
+    padding: 1.5rem 1.15rem;
+  }
+
+  .map-iframe-wrapper iframe {
+    height: 220px;
+  }
+
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer-disclaimer-card {
+    padding: 1.25rem 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer-bottom-bar {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.85rem;
+    padding-top: 1.25rem;
+  }
+
+  .footer-copy-wrap {
+    text-align: center;
+  }
+
+  .bottom-links {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Toast Notification */
+  .toast-container {
+    left: 1rem;
+    right: 1rem;
+    bottom: 4.75rem;
+    max-width: calc(100% - 2rem);
+  }
+
+  .toast {
+    padding: 0.75rem 1rem;
+    font-size: 0.84rem;
+  }
+}
+
+/* Compact Smartphones Breakpoint (<= 480px) */
+@media (max-width: 480px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .header-container {
+    min-height: 60px;
+  }
+
+  .brand-seal {
+    width: 38px;
+    height: 38px;
+  }
+
+  .seal-initials {
+    font-size: 0.95rem;
+  }
+
+  .adv-title {
+    font-size: 1.02rem;
+  }
+
+  .adv-sub {
+    font-size: 0.62rem;
+    max-width: 175px;
+  }
+
+  .hero-adv-name {
+    font-size: 1.75rem;
+  }
+
+  .hero-title-sub {
+    font-size: 1.12rem;
+  }
+
+  .hero-badge-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .gold-pill, .navy-pill {
+    font-size: 0.72rem;
+    padding: 0.25rem 0.65rem;
+  }
+
+  .academic-chip {
+    padding: 0.75rem 0.85rem;
+  }
+
+  .chip-title {
+    font-size: 1.05rem;
+  }
+
+  .receipt-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+  }
+
+  .r-value {
+    text-align: left;
+  }
+
+  .mob-action-info {
+    display: none;
+  }
+
+  .mob-action-btn-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .mob-action-btn-group .mob-action-btn {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+/* Ultra-Compact Screens (<= 360px) */
+@media (max-width: 360px) {
+  .adv-title {
+    font-size: 0.92rem;
+  }
+
+  .adv-sub {
+    font-size: 0.58rem;
+    max-width: 145px;
+  }
+
+  .slots-container {
+    grid-template-columns: 1fr;
+  }
+
+  .time-slot-btn {
+    font-size: 0.8rem;
+  }
+
+  .bci-card-header h2 {
+    font-size: 1.05rem;
   }
 }
 

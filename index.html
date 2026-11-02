@@ -24,7 +24,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
   
   <!-- Custom Stylesheet with Cache Buster -->
-  <link rel="stylesheet" href="css/style.css?v=1.2">
+  <link rel="stylesheet" href="css/style.css?v=1.3">
 </head>
 <body id="top">
 
@@ -156,7 +156,7 @@
       <li><a href="#unboxing-law" class="drawer-link">Unboxing Law (Media & Videos)</a></li>
       <li><a href="#schedule" class="drawer-link">Chamber Consultation (5 PM – 9 PM)</a></li>
       <li><a href="#contact" class="drawer-link">Chamber Location & Contact</a></li>
-      <li><a href="#appointment-section" class="btn btn-gold w-full mt-4">Schedule Online Consultation</a></li>
+      <li><a href="#appointment-section" class="btn btn-gold w-full mt-4 drawer-link">Schedule Online Consultation</a></li>
     </ul>
     <div class="drawer-footer">
       <p class="drawer-hours">Chamber Hours: 5:00 PM – 9:00 PM</p>
@@ -825,6 +825,7 @@
     <!-- APPOINTMENT BOOKING SECTION (5:00 PM – 9:00 PM) -->
     <!-- ========================================================================= -->
     <section class="section appointment-section" id="appointment-section">
+      <div id="schedule" style="position: absolute; top: -90px; pointer-events: none;"></div>
       <div class="container">
         
         <div class="section-header text-center">
@@ -1423,7 +1424,30 @@
   <!-- Toast Notification Container -->
   <div class="toast-container" id="toastContainer" aria-live="polite"></div>
 
+  <!-- Mobile Sticky Consultation Action Bar (Visible only on mobile devices) -->
+  <aside class="mobile-bottom-bar" aria-label="Quick mobile chamber actions">
+    <div class="mobile-bottom-bar-inner">
+      <div class="mob-action-info">
+        <span class="pulse-dot"></span>
+        <div class="mob-action-text">
+          <span class="mob-action-label">Evening Chamber</span>
+          <span class="mob-action-sub">5:00 PM – 9:00 PM IST</span>
+        </div>
+      </div>
+      <div class="mob-action-btn-group">
+        <a href="mailto:sukumari3128@gmail.com" class="mob-action-btn mob-action-btn-email" aria-label="Email chamber">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>Email</span>
+        </a>
+        <a href="#appointment-section" class="mob-action-btn mob-action-btn-book" aria-label="Book chamber appointment">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span>Book Slot</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
   <!-- JavaScript with Cache Buster -->
-  <script src="js/app.js?v=1.2"></script>
+  <script src="js/app.js?v=1.3"></script>
 </body>
 </html>
